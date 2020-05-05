@@ -1,19 +1,34 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Task todo</h1>
+    <input type="text" v-model="task" />
+    <button @click="addTodo">Add</button>
+    <button @click="aloHatoDo">AloHaaa</button>
+    <li v-for="v in getTodos" :key="v.id">{{v.task}}</li>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import { mapGetters } from "vuex";
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  name: "App",
+  data() {
+    return {
+      task: ""
+    };
+  },
+  computed: {
+    ...mapGetters(["getTodos"])
+  },
+  methods: {
+    addTodo() {
+      this.$store.dispatch("addTodo", this.task);
+    },
+    aloHatoDo() {
+      this.$store.commit('aloHa','kxxxxxxx')
+    }
   }
-}
+};
 </script>
 
 <style>
